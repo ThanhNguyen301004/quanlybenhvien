@@ -1,0 +1,132 @@
+﻿<Page x:Class="QUANLYBENHVIEN.QuanLyHoaDonVienPhi"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:QUANLYBENHVIEN"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="900">
+
+    <Grid Background="#F5F7FA" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Tiêu đề -->
+        <TextBlock Text="QUẢN LÝ HÓA ĐƠN VIỆN PHÍ"
+                   FontSize="26" FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   Margin="0 10 0 20"/>
+
+        <!-- Nội dung -->
+        <StackPanel Grid.Row="1">
+
+            <!-- Thanh công cụ -->
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Nút thêm -->
+                <Button Width="50" Height="35" Grid.Column="0" Background="#00cc00"
+                        Click="Btn_Them_Click" Padding="0">
+                    <TextBlock Text="➕" FontSize="20" Foreground="White"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Button>
+
+                <!-- Combobox -->
+                <ComboBox x:Name="ComboBox_TimKiem"
+                          Grid.Column="2" Width="200" SelectedIndex="0"
+                          Margin="0 0 10 0">
+                    <ComboBoxItem Content="Bệnh nhân"/>
+                    <ComboBoxItem Content="Phòng bệnh"/>
+                    <ComboBoxItem Content="Ngày nhập viện"/>
+                    <ComboBoxItem Content="Ngày xuất viện"/>
+                </ComboBox>
+
+                <!-- TextBox tìm kiếm -->
+                <TextBox x:Name="Tb_timKiem"
+                         Grid.Column="3"
+                         Width="200" Height="30"
+                         VerticalAlignment="Center"
+                         Padding="5"
+                         Text="Tìm kiếm..."
+                         Foreground="Gray"
+                         GotFocus="TextBox_GotFocus"
+                         LostFocus="TextBox_LostFocus"/>
+
+                <!-- Nút tìm -->
+                <Button Width="50" Height="35" Grid.Column="4"
+                        Click="Button_TimKiem_Click"
+                        Margin="5 0 0 0"
+                        Padding="0">
+                    <TextBlock Text="🔍" FontSize="20" Foreground="White"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Button>
+            </Grid>
+
+            <!-- Bảng DataGrid -->
+            <DataGrid x:Name="DG_HoaDon"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False"
+                      IsReadOnly="True"
+                      SelectionMode="Extended"
+                      SelectionUnit="FullRow"
+                      Margin="0"
+                      HeadersVisibility="Column"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch">
+
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn Header="Mã Hóa Đơn" Binding="{Binding MaHoaDon}" Width="*"/>
+                    <DataGridTextColumn Header="Bệnh Nhân" Binding="{Binding BENHNHAN.HoTen}" Width="*"/>
+                    <DataGridTextColumn Header="Phòng Bệnh" Binding="{Binding PHONGBENH.SoPhong}" Width="*"/>
+                    <DataGridTextColumn Header="Ngày Nhập Viện"
+                                        Binding="{Binding NgayNhapVien, StringFormat=dd/MM/yyyy}" Width="*"/>
+                    <DataGridTextColumn Header="Ngày Xuất Viện"
+                                        Binding="{Binding NgayXuatVien, StringFormat=dd/MM/yyyy}" Width="*"/>
+
+                    <DataGridTextColumn Header="Thành Tiền" Binding="{Binding ThanhTien}" Width="*"/>
+
+                    <!-- Cột thao tác -->
+                    <DataGridTemplateColumn Header="Thao tác" Width="200">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                                    <!-- Nút sửa -->
+                                    <Button Background="#ff9900" Width="50" Height="35" Margin="2"
+                                            Tag="{Binding MaHoaDon}"
+                                            Click="Btn_Sua_Row_Click"
+                                            Padding="0">
+                                        <TextBlock Text="✏️" FontSize="18" Foreground="White"
+                                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Button>
+
+                                    <!-- Nút xóa -->
+                                    <Button Background="#cc0000" Width="50" Height="35" Margin="2"
+                                            Tag="{Binding MaHoaDon}"
+                                            Click="Btn_Xoa_Row_Click"
+                                            Padding="0">
+                                        <TextBlock Text="🗑️" FontSize="18" Foreground="White"
+                                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Button>
+
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                </DataGrid.Columns>
+
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+</Page>
