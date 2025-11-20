@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace QUANLYBENHVIEN
 {
@@ -25,8 +16,7 @@ namespace QUANLYBENHVIEN
 
         private void Button_Click_DangKy(object sender, RoutedEventArgs e)
         {
-            DangKy dk = new DangKy();
-            dk.Show();
+            new DangKy().Show();
             this.Close();
         }
 
@@ -34,38 +24,53 @@ namespace QUANLYBENHVIEN
         {
             string tk = Tb_taiKhoan.Text.Trim();
             string mk = Tb_matKhau.Password.Trim();
-
             string loaiTkChon = (Cbb_loaiTaiKhoan.SelectedItem as ComboBoxItem)?.Content.ToString();
 
-            using (var db = new QLBVEntities())
+            // Kiểm tra dữ liệu đầu vào
+            if (string.IsNullOrEmpty(tk) || string.IsNullOrEmpty(mk) || string.IsNullOrEmpty(loaiTkChon))
             {
-                var user = db.TAIKHOANs.FirstOrDefault(x => x.TaiKhoan1 == tk && x.MaKhau == mk);
+                MessageBox.Show("Vui lòng nhập đủ thông tin!", "Thông báo",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
-                if (user != null)
-                {
-                    if (loaiTkChon == "Quản trị viên" && user.LoaiTK == "Quản trị viên")
-                    {
-                        MainWindow main = new MainWindow(user.TaiKhoan1);
-                        main.Show();
-                        this.Close();
-                    }
-                    else if (loaiTkChon == "Khách" && user.LoaiTK == "Khách")
-                    {
-                        KhachHang kh = new KhachHang(user.TaiKhoan1); // bạn tạo thêm form KhachWindow
-                        kh.Show();
-                        this.Close();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Bạn không có quyền đăng nhập với vai trò này!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Sai tài khoản hoặc mật khẩu!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+            // Lấy user từ DB
+            var user = db.TAIKHOANs
+                          .FirstOrDefault(x => x.TaiKhoan1 == tk && x.MaKhau == mk);
+
+            if (user == null)
+            {
+                MessageBox.Show("Sai tài khoản hoặc mật khẩu!", "Thông báo",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            // Phân quyền đăng nhập
+            if (user.LoaiTK != loaiTkChon)
+            {
+                MessageBox.Show("Bạn không có quyền đăng nhập với vai trò này!",
+                    "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            // Mở form tương ứng
+            Window nextWindow = user.LoaiTK switch
+            {
+                "Quản trị viên" => new MainWindow(user.TaiKhoan1),
+                "Khách" => new KhachHang(user.TaiKhoan1),
+                _ => null
+            };
+
+            if (nextWindow != null)
+            {
+                nextWindow.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Loại tài khoản không hợp lệ!", "Thông báo",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
     }
 }
