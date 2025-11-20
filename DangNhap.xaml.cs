@@ -14,9 +14,6 @@ using System.Windows.Shapes;
 
 namespace QUANLYBENHVIEN
 {
-    /// <summary>
-    /// Interaction logic for DangNhap.xaml
-    /// </summary>
     public partial class DangNhap : Window
     {
         QLBVEntities db = new QLBVEntities();
