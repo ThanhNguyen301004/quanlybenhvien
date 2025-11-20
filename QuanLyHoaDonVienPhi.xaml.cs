@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Data.Entity;
 
-
+//
 namespace QUANLYBENHVIEN
 {
     public partial class QuanLyHoaDonVienPhi : Page
