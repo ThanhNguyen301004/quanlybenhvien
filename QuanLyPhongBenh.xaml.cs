@@ -1,26 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace QUANLYBENHVIEN
 {
-    /// <summary>
-    /// Interaction logic for QuanLyPhongBenh.xaml
-    /// </summary>
     public partial class QuanLyPhongBenh : Page
     {
-        QLBVEntities db = new QLBVEntities();
+        private readonly QLBVEntities db = new QLBVEntities();
 
         public QuanLyPhongBenh()
         {
@@ -37,12 +26,13 @@ namespace QUANLYBENHVIEN
                     SoPhong = pb.SoPhong,
                     LoaiPhong = pb.LoaiPhong,
                     TrangThai = pb.TrangThai,
-                    TienPhong = (decimal)pb.TienPhong,
-                    IsSelected = false
-                }).ToList();
+                    TienPhong = (decimal)pb.TienPhong
+                })
+                .ToList();
 
             DG_PhongBenh.ItemsSource = data;
         }
+
         public class PhongBenhViewModel
         {
             public int MaPhong { get; set; }
@@ -50,98 +40,71 @@ namespace QUANLYBENHVIEN
             public string LoaiPhong { get; set; }
             public string TrangThai { get; set; }
             public decimal TienPhong { get; set; }
-
-            public bool IsSelected { get; set; } = false;
+            public bool IsSelected { get; } 
         }
 
         private void ChkAll_Click(object sender, RoutedEventArgs e)
         {
-            bool isChecked = (sender as CheckBox).IsChecked ?? false;
+            bool isChecked = (sender as CheckBox)?.IsChecked == true;
 
-            foreach (dynamic item in DG_PhongBenh.ItemsSource)
-            {
+            foreach (PhongBenhViewModel item in DG_PhongBenh.ItemsSource)
                 item.IsSelected = isChecked;
-            }
 
             DG_PhongBenh.Items.Refresh();
         }
 
         private void Btn_Them_Click(object sender, RoutedEventArgs e)
         {
-            Form_PhongBenh fpb = new Form_PhongBenh();
-
-            bool? result = fpb.ShowDialog();
-
-            if (result == true)
-            {
+            var form = new Form_PhongBenh();
+            if (form.ShowDialog() == true)
                 LoadData();
-            }
         }
 
         private void Btn_Sua_Row_Click(object sender, RoutedEventArgs e)
         {
-            var btn = sender as Button;
-            if (btn?.Tag != null && int.TryParse(btn.Tag.ToString(), out int maPB))
+            if (sender is Button btn && int.TryParse(btn.Tag?.ToString(), out int maPhong))
             {
-                using (var newDb = new QLBVEntities())
+                using var context = new QLBVEntities();
+                var phong = context.PHONGBENHs.Find(maPhong);
+                if (phong != null)
                 {
-                    var pb = newDb.PHONGBENHs.Find(maPB);
-                    if (pb != null)
-                    {
-                        Form_PhongBenh fpb = new Form_PhongBenh(pb);
-                        bool? result = fpb.ShowDialog();
-                        if (result == true)
-                        {
-                            LoadData();
-                        }
-                    }
+                    var form = new Form_PhongBenh(phong);
+                    if (form.ShowDialog() == true)
+                        LoadData();
                 }
             }
         }
 
         private void Btn_Xoa_Row_Click(object sender, RoutedEventArgs e)
         {
-            var btn = sender as Button;
-            if (btn?.Tag != null && int.TryParse(btn.Tag.ToString(), out int maPB))
+            if (sender is Button btn && int.TryParse(btn.Tag?.ToString(), out int maPhong))
             {
-                var pb = db.PHONGBENHs.Find(maPB);
-                if (pb != null)
+                var phong = db.PHONGBENHs.Find(maPhong);
+                if (phong == null)
                 {
-                    var confirm = MessageBox.Show(
-                        $"Bạn có chắc muốn xóa phòng bệnh: {pb.SoPhong}?",
-                        "Xác nhận xóa",
-                        MessageBoxButton.YesNo,
-                        MessageBoxImage.Warning
-                    );
-
-                    if (confirm == MessageBoxResult.Yes)
-                    {
-                        try
-                        {
-                            db.PHONGBENHs.Remove(pb);
-                            db.SaveChanges();
-
-                            MessageBox.Show("Xóa thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                            LoadData();
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Không thể xóa phòng bệnh này. Chi tiết lỗi: " + ex.Message,
-                                "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
-                    }
+                    MessageBox.Show("Không tìm thấy phòng bệnh!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
                 }
-                else
+
+                if (MessageBox.Show($"Xóa phòng bệnh: {phong.SoPhong}?", "Xác nhận", 
+                    MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes)
+                    return;
+
+                try
                 {
-                    MessageBox.Show("Không tìm thấy phòng bệnh để xóa!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    db.PHONGBENHs.Remove(phong);
+                    db.SaveChanges();
+                    MessageBox.Show("Xóa thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    LoadData();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Không thể xóa: " + ex.Message, "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
 
-        
-
-        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        private void Tb_timKiem_GotFocus(object sender, RoutedEventArgs e)
         {
             if (Tb_timKiem.Text == "Tìm kiếm...")
             {
@@ -150,7 +113,7 @@ namespace QUANLYBENHVIEN
             }
         }
 
-        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        private void Tb_timKiem_LostFocus(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(Tb_timKiem.Text))
             {
@@ -162,9 +125,7 @@ namespace QUANLYBENHVIEN
         private void Button_TimKiem_Click(object sender, RoutedEventArgs e)
         {
             string keyword = Tb_timKiem.Text.Trim();
-
-            if (keyword == "Tìm kiếm...")
-                keyword = "";
+            if (keyword == "Tìm kiếm...") keyword = "";
 
             if (string.IsNullOrEmpty(keyword))
             {
@@ -172,30 +133,24 @@ namespace QUANLYBENHVIEN
                 return;
             }
 
-            using (var newDb = new QLBVEntities())
-            {
-                var query = newDb.PHONGBENHs.AsQueryable();
+            using var context = new QLBVEntities();
+            IQueryable<PHONGBENH> query = context.PHONGBENHs;
 
-                switch (ComboBox_TimKiem.SelectedIndex)
+            int selectedIndex = ComboBox_TimKiem.SelectedIndex;
+            if (selectedIndex == 0)      query = query.Where(p => p.SoPhong.Contains(keyword));
+            else if (selectedIndex == 1) query = query.Where(p => p.LoaiPhong.Contains(keyword));
+            else if (selectedIndex == 2) query = query.Where(p => p.TrangThai.Contains(keyword));
+
+            DG_PhongBenh.ItemsSource = query
+                .Select(p => new PhongBenhViewModel
                 {
-                    case 0: // Số phòng
-                        query = query.Where(pb => pb.SoPhong.Contains(keyword));
-                        break;
-
-                    case 1: // Loại phòng
-                        query = query.Where(pb => pb.LoaiPhong.Contains(keyword));
-                        break;
-
-                    case 2: // Trạng thái
-                        query = query.Where(pb => pb.TrangThai.Contains(keyword));
-                        break;
-
-                   
-                }
-
-                DG_PhongBenh.ItemsSource = query.ToList();
-            }
+                    MaPhong = p.MaPhong,
+                    SoPhong = p.SoPhong,
+                    LoaiPhong = p.LoaiPhong,
+                    TrangThai = p.TrangThai,
+                    TienPhong = (decimal)p.TienPhong
+                })
+                .ToList();
         }
-
     }
 }
