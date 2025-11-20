@@ -1,0 +1,77 @@
+﻿<Page x:Class="QUANLYBENHVIEN.InHoaDon"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:QUANLYBENHVIEN"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="InHoaDon"> 
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label FontWeight="Bold" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 50 0 0" Content="LỊCH SỬ HÓA ĐƠN"/>
+
+        <Grid Grid.Row="1" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <GroupBox Header="Nhập thông tin tìm kiếm" Grid.Column="0" Margin="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Margin="10" Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0" Grid.Row="0"  Content="Mã hóa đơn: " Margin="5"/>
+                            <TextBox x:Name="Tb_maHoaDon" Grid.Column="1" Grid.Row="0" Margin="5" Width="200"/>
+
+                        </Grid>
+                        <StackPanel Grid.Row="1" Orientation="Vertical">
+                            <Button Content="Tìm kiếm" Width="150" Height="25" VerticalAlignment="Top"  Margin="10 20 0 0" Click="Btn_TimKiem_Click"/>
+                            <Button Content="In hóa đơn" Width="150" Height="25" VerticalAlignment="Top" Margin="10 20 0 0" Click="Btn_InHoaDon_Click"/>
+                        </StackPanel>
+
+                    </Grid>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    </StackPanel>
+
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Grid.Column="1" Header="Bảng dữ liệu" Margin="5">
+                <DataGrid IsReadOnly="True" AutoGenerateColumns="False" x:Name="DG_HOADONVIENPHI" Margin="5">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Mã Hóa Đơn" Binding="{Binding MaHoaDon}" Width="*"/>
+                        <DataGridTextColumn Header="Bệnh Nhân" Binding="{Binding BENHNHAN.HoTen}" Width="*"/>
+                        <DataGridTextColumn Header="Phòng Bệnh" Binding="{Binding PHONGBENH.SoPhong}" Width="*"/>
+                        <DataGridTextColumn Header="Ngày Nhập Viện" Binding="{Binding NgayNhapVien}" Width="*"/>
+                        <DataGridTextColumn Header="Ngày Xuất Viện" Binding="{Binding NgayXuatVien}" Width="*"/>
+                        <DataGridTextColumn Header="Thành Tiền" Binding="{Binding ThanhTien}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+        </Grid>
+    </Grid>
+</Page>

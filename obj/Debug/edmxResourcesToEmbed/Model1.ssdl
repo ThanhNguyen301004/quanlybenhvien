@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QLBVModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BACSI">
+    <Key>
+      <PropertyRef Name="MaBacSi" />
+    </Key>
+    <Property Name="MaBacSi" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HoTen" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ChuyenKhoa" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="SoDienThoai" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="AnhDaiDien" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="BENHNHAN">
+    <Key>
+      <PropertyRef Name="MaBenhNhan" />
+    </Key>
+    <Property Name="MaBenhNhan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HoTen" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="NgaySinh" Type="date" Nullable="false" />
+    <Property Name="GioiTinh" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="SoDienThoai" Type="nvarchar" MaxLength="50" />
+    <Property Name="DiaChi" Type="nvarchar" MaxLength="255" />
+    <Property Name="SoLanDen" Type="int" />
+    <Property Name="LoaiBaoHiem" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="HOADONVIENPHI">
+    <Key>
+      <PropertyRef Name="MaHoaDon" />
+    </Key>
+    <Property Name="MaHoaDon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaBenhNhan" Type="int" />
+    <Property Name="MaPhong" Type="int" />
+    <Property Name="NgayNhapVien" Type="datetime" Nullable="false" />
+    <Property Name="NgayXuatVien" Type="datetime" />
+    <Property Name="ThanhTien" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="LICHHEN">
+    <Key>
+      <PropertyRef Name="MaLichHen" />
+    </Key>
+    <Property Name="MaLichHen" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaBenhNhan" Type="int" />
+    <Property Name="MaBacSi" Type="int" />
+    <Property Name="NgayHen" Type="datetime" Nullable="false" />
+    <Property Name="MucDich" Type="nvarchar" MaxLength="255" />
+    <Property Name="TrangThai" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="PHONGBENH">
+    <Key>
+      <PropertyRef Name="MaPhong" />
+    </Key>
+    <Property Name="MaPhong" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SoPhong" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LoaiPhong" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TrangThai" Type="nvarchar" MaxLength="50" />
+    <Property Name="TienPhong" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="TAIKHOAN">
+    <Key>
+      <PropertyRef Name="TaiKhoan" />
+    </Key>
+    <Property Name="TaiKhoan" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MaKhau" Type="nvarchar" MaxLength="50" />
+    <Property Name="LoaiTK" Type="nvarchar" MaxLength="50" />
+    <Property Name="AnhCaNhan" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK__HOADONVIE__MaBen__02FC7413">
+    <End Role="BENHNHAN" Type="Self.BENHNHAN" Multiplicity="0..1" />
+    <End Role="HOADONVIENPHI" Type="Self.HOADONVIENPHI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BENHNHAN">
+        <PropertyRef Name="MaBenhNhan" />
+      </Principal>
+      <Dependent Role="HOADONVIENPHI">
+        <PropertyRef Name="MaBenhNhan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HOADONVIE__MaPho__03F0984C">
+    <End Role="PHONGBENH" Type="Self.PHONGBENH" Multiplicity="0..1" />
+    <End Role="HOADONVIENPHI" Type="Self.HOADONVIENPHI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PHONGBENH">
+        <PropertyRef Name="MaPhong" />
+      </Principal>
+      <Dependent Role="HOADONVIENPHI">
+        <PropertyRef Name="MaPhong" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LICHHEN__MaBacSi__160F4887">
+    <End Role="BACSI" Type="Self.BACSI" Multiplicity="0..1" />
+    <End Role="LICHHEN" Type="Self.LICHHEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BACSI">
+        <PropertyRef Name="MaBacSi" />
+      </Principal>
+      <Dependent Role="LICHHEN">
+        <PropertyRef Name="MaBacSi" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LICHHEN__MaBenhN__4D94879B">
+    <End Role="BENHNHAN" Type="Self.BENHNHAN" Multiplicity="0..1" />
+    <End Role="LICHHEN" Type="Self.LICHHEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BENHNHAN">
+        <PropertyRef Name="MaBenhNhan" />
+      </Principal>
+      <Dependent Role="LICHHEN">
+        <PropertyRef Name="MaBenhNhan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QLBVModelStoreContainer">
+    <EntitySet Name="BACSI" EntityType="Self.BACSI" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BENHNHAN" EntityType="Self.BENHNHAN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HOADONVIENPHI" EntityType="Self.HOADONVIENPHI" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LICHHEN" EntityType="Self.LICHHEN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PHONGBENH" EntityType="Self.PHONGBENH" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TAIKHOAN" EntityType="Self.TAIKHOAN" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__HOADONVIE__MaBen__02FC7413" Association="Self.FK__HOADONVIE__MaBen__02FC7413">
+      <End Role="BENHNHAN" EntitySet="BENHNHAN" />
+      <End Role="HOADONVIENPHI" EntitySet="HOADONVIENPHI" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HOADONVIE__MaPho__03F0984C" Association="Self.FK__HOADONVIE__MaPho__03F0984C">
+      <End Role="PHONGBENH" EntitySet="PHONGBENH" />
+      <End Role="HOADONVIENPHI" EntitySet="HOADONVIENPHI" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LICHHEN__MaBacSi__160F4887" Association="Self.FK__LICHHEN__MaBacSi__160F4887">
+      <End Role="BACSI" EntitySet="BACSI" />
+      <End Role="LICHHEN" EntitySet="LICHHEN" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LICHHEN__MaBenhN__4D94879B" Association="Self.FK__LICHHEN__MaBenhN__4D94879B">
+      <End Role="BENHNHAN" EntitySet="BENHNHAN" />
+      <End Role="LICHHEN" EntitySet="LICHHEN" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

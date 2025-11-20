@@ -1,0 +1,107 @@
+﻿<Window x:Class="QUANLYBENHVIEN.KhachHang"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QUANLYBENHVIEN"
+        mc:Ignorable="d"
+        Title="Bệnh Viện Đa Khoa" Height="800" Width="1400" 
+        WindowState="Maximized" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <!-- Button Styles -->
+        <Style x:Key="NavButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#666666"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="20,10"/>
+            <Setter Property="Margin" Value="10,0"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="#2196F3"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header Navigation Bar -->
+        <Border Grid.Row="0" Background="White" Padding="0,15">
+            <Border.Effect>
+                <DropShadowEffect Color="Gray" Direction="270" ShadowDepth="2" Opacity="0.1" BlurRadius="5"/>
+            </Border.Effect>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Logo and Menu Button -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="30,0">
+                    <Button Content="☰" FontSize="18" Background="Transparent" BorderThickness="0" 
+                            Foreground="#666666" Cursor="Hand" Margin="0,0,20,0" />
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="🏥" FontSize="24" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <TextBlock Text="Bệnh Khoa Đa Khoa" FontSize="22" FontWeight="Bold" 
+                                  Foreground="#2196F3" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Navigation Menu -->
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Content="TRANG CHỦ" Style="{StaticResource NavButtonStyle}" Click="Button_Click_TrangChu" />
+                    <Button Content="Chuyên khoa&#x0A;Tìm bác sĩ theo chuyên khoa" Style="{StaticResource NavButtonStyle}" />
+                    <Button Content="Bác sĩ&#x0A;Chọn bác sĩ giỏi" Style="{StaticResource NavButtonStyle}" Click="Button_Click_BacSi" />
+                    <Button Content="Ứng dụng AI&#x0A;Dự đoán bệnh tiểu đường" Style="{StaticResource NavButtonStyle}" Click="Button_Click_DuDoanBenhTieuDuong"/>
+
+                    <!-- Avatar + tên -->
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0,0,0">
+                        <TextBlock FontSize="14" x:Name="txtUserName" Foreground="Black"
+                                   
+                   FontWeight="SemiBold"
+                   VerticalAlignment="Center"/>
+
+                        <!-- Avatar hình tròn -->
+                        <Ellipse Width="40" Height="40" Stroke="White" StrokeThickness="1" Margin="0,0,10,0">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="C:\Users\OS\source\repos\QUANLYBENHVIEN\QUANLYBENHVIEN\image\defaul_avatar.png"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+
+                        <!-- Hiển thị tên ngay bên phải avatar -->
+
+
+                        <Button Content="Ứng dụng AI&#x0A;Dự đoán bệnh tiểu đường" Style="{StaticResource NavButtonStyle}" Click="Button_Click_DuDoanBenhTieuDuong"/>
+
+                    </StackPanel>
+                </StackPanel>
+
+
+            </Grid>
+        </Border>
+
+        <!-- Main Content Frame -->
+        <Frame Grid.Row="1" x:Name="MainFrame" NavigationUIVisibility="Hidden" 
+                Background="#F8F9FA"/>
+    </Grid>
+</Window>
