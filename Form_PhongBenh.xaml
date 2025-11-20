@@ -1,0 +1,62 @@
+﻿<Window x:Class="QUANLYBENHVIEN.Form_PhongBenh"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QUANLYBENHVIEN"
+        mc:Ignorable="d"
+        Title="Form_PhongBenh" Height="450" Width="400">
+    <Grid>
+        <GroupBox Header="Thông tin phòng bệnh" Grid.Column="0" Margin="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Margin="10" Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Label Grid.Column="0" Grid.Row="0"  Content="Số phòng: " Margin="5"/>
+                    <Label Grid.Column="0" Grid.Row="1"  Content="Loại phòng: " Margin="5"/>
+                    <Label Grid.Column="0" Grid.Row="2"  Content="Trạng thái: " Margin="5"/>
+                    <Label Grid.Column="0" Grid.Row="3"  Content="Tiền phòng: " Margin="5"/>
+
+                    <TextBox x:Name="Tb_soPhong" Grid.Column="1" Grid.Row="0" Margin="5"/>
+                    <ComboBox x:Name="ComboBox_loaiPhong" Grid.Column="1" Grid.Row="1" Margin="5">
+                        <ComboBoxItem Content="Phòng Khám Nội"/>
+                        <ComboBoxItem Content="Phòng Khám Ngoại"/>
+                        <ComboBoxItem Content="Phòng Nhi"/>
+                        <ComboBoxItem Content="Phòng Sản - Phụ Khoa"/>
+                        <ComboBoxItem Content="Phòng Tâm Thần"/>
+                    </ComboBox>
+
+                    <ComboBox x:Name="ComboBox_trangThai" Grid.Column="1" Grid.Row="2" Margin="5">
+                        <ComboBoxItem Content="Trống" IsSelected="True"/>
+                        <ComboBoxItem Content="Đang sử dụng"/>
+                        <ComboBoxItem Content="Bảo trì"/>
+                    </ComboBox>
+                    <TextBox x:Name="Tb_tienPhong" Grid.Column="1" Grid.Row="3" Margin="5"/>
+
+                </Grid>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                    <Button Content="Xác nhận" Width="100" Height="25" Margin="10" Click="Button_XacNhan_Click"/>
+                    <Button Content="Hủy" Width="100" Height="25" Margin="10" Click="Button_Huy_Click"/>
+                </StackPanel>
+                
+
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>

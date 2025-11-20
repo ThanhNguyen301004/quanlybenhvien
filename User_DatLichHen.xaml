@@ -1,0 +1,79 @@
+﻿<Window x:Class="QUANLYBENHVIEN.User_DatLichHen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QUANLYBENHVIEN"
+        mc:Ignorable="d"
+        Title="User_DatLichHen" Height="550" Width="400">
+    <Grid>
+        <GroupBox Header="Đăng ký khám bệnh" Margin="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Margin="10" Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Label Grid.Column="0" Grid.Row="0"  Content="Họ Tên: " Margin="5"/>
+                    <Label Grid.Column="0" Grid.Row="1"  Content="Ngày sinh: " Margin="5"/>
+                    <Label Grid.Column="0" Grid.Row="2"  Content="Giới tính: " Margin="5"/>
+                    <Label Grid.Column="0" Grid.Row="3"  Content="Số điện thoại: " Margin="5"/>
+                    <Label Grid.Column="0" Grid.Row="4"  Content="Địa chỉ: " Margin="5"/>
+                    <Label Grid.Column="0" Grid.Row="5"  Content="Loại bảo hiểm: " Margin="5"/>
+                    <Label Grid.Column="0" Grid.Row="6"  Content="Email liên hệ: " Margin="5"/>
+                    <Label Grid.Column="0" Grid.Row="7"  Content="Ngày đặt lịch khám: " Margin="5"/>
+                    <Label Grid.Column="0" Grid.Row="8"  Content="Lý do khám: " Margin="5"/>
+
+                    <TextBox x:Name="Tb_hoTen" Grid.Column="1" Grid.Row="0" Width="auto" Margin="5"/>
+                    <DatePicker x:Name="dp_ngaySinh" Grid.Column="1" Grid.Row="1" Margin="5" SelectedDate="{x:Static sys:DateTime.Now}"/>
+                    <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" Margin="5">
+                        <RadioButton x:Name="rb_nam" Content="Nam" Margin="5"/>
+                        <RadioButton x:Name="rb_nu" Content="Nữ" Margin="5"/>
+                        <RadioButton x:Name="rb_khac" Content="Khác" Margin="5"/>
+                    </StackPanel>
+                    <TextBox x:Name="Tb_soDienThoai" Grid.Column="1" Grid.Row="3" Width="auto" Margin="5"/>
+                    <TextBox x:Name="Tb_diaChi" Grid.Column="1" Grid.Row="4" Width="auto" Margin="5" />
+                    <ComboBox x:Name="ComboBox_loaiBaoHiem" Grid.Column="1" Grid.Row="5" Margin="5">
+                        <ComboBoxItem Content="Bảo hiểm y tế" IsEnabled="True"/>
+                        <ComboBoxItem Content="Bảo hiểm xã hội"/>
+                        <ComboBoxItem Content="Không có"/>
+                    </ComboBox>
+                    <DatePicker x:Name="dp_ngayDatLich"
+                        Grid.Column="1" Grid.Row="7"
+                        Margin="5"
+                        SelectedDate="{x:Static sys:DateTime.Now}"
+                        DisplayDateStart="{x:Static sys:DateTime.Today}"/>
+                    <TextBox x:Name="Tb_mucDich" Grid.Column="1" Grid.Row="8" Width="auto" Margin="5"/>
+                    <TextBox x:Name="Tb_email" Grid.Column="1" Grid.Row="6" Width="auto" Margin="5"/>
+
+                </Grid>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+
+                    <Button Content="Xác nhận" Width="100" Height="25" Margin="10" Click="Button_XacNhan_Click"/>
+
+                    <Button Content="Hủy" Width="100" Height="25" Margin="10" Click="Button_Huy_Click"/>
+                </StackPanel>
+
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>

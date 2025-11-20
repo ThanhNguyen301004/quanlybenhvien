@@ -1,0 +1,9 @@
+﻿===== HÓA ĐƠN VIỆN PHÍ =====
+Mã hóa đơn  : 1
+Bệnh nhân   : Thanh
+SĐT         : 0903574361
+Phòng bệnh  : A2
+Ngày nhập viện : 03/09/2025
+Ngày xuất viện : 11/09/2025
+Thành tiền  : 206,000 VNĐ
+============================

@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QLBVModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BACSI">
+    <Key>
+      <PropertyRef Name="MaBacSi" />
+    </Key>
+    <Property Name="MaBacSi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ChuyenKhoa" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SoDienThoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="AnhDaiDien" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="LICHHENs" Relationship="Self.FK__LICHHEN__MaBacSi__160F4887" FromRole="BACSI" ToRole="LICHHEN" />
+  </EntityType>
+  <EntityType Name="BENHNHAN">
+    <Key>
+      <PropertyRef Name="MaBenhNhan" />
+    </Key>
+    <Property Name="MaBenhNhan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NgaySinh" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="GioiTinh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SoDienThoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChi" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="SoLanDen" Type="Int32" />
+    <Property Name="LoaiBaoHiem" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HOADONVIENPHIs" Relationship="Self.FK__HOADONVIE__MaBen__02FC7413" FromRole="BENHNHAN" ToRole="HOADONVIENPHI" />
+    <NavigationProperty Name="LICHHENs" Relationship="Self.FK__LICHHEN__MaBenhN__4D94879B" FromRole="BENHNHAN" ToRole="LICHHEN" />
+  </EntityType>
+  <EntityType Name="HOADONVIENPHI">
+    <Key>
+      <PropertyRef Name="MaHoaDon" />
+    </Key>
+    <Property Name="MaHoaDon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaBenhNhan" Type="Int32" />
+    <Property Name="MaPhong" Type="Int32" />
+    <Property Name="NgayNhapVien" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="NgayXuatVien" Type="DateTime" Precision="3" />
+    <Property Name="ThanhTien" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="BENHNHAN" Relationship="Self.FK__HOADONVIE__MaBen__02FC7413" FromRole="HOADONVIENPHI" ToRole="BENHNHAN" />
+    <NavigationProperty Name="PHONGBENH" Relationship="Self.FK__HOADONVIE__MaPho__03F0984C" FromRole="HOADONVIENPHI" ToRole="PHONGBENH" />
+  </EntityType>
+  <EntityType Name="LICHHEN">
+    <Key>
+      <PropertyRef Name="MaLichHen" />
+    </Key>
+    <Property Name="MaLichHen" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaBenhNhan" Type="Int32" />
+    <Property Name="MaBacSi" Type="Int32" />
+    <Property Name="NgayHen" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="MucDich" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="TrangThai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="BACSI" Relationship="Self.FK__LICHHEN__MaBacSi__160F4887" FromRole="LICHHEN" ToRole="BACSI" />
+    <NavigationProperty Name="BENHNHAN" Relationship="Self.FK__LICHHEN__MaBenhN__4D94879B" FromRole="LICHHEN" ToRole="BENHNHAN" />
+  </EntityType>
+  <EntityType Name="PHONGBENH">
+    <Key>
+      <PropertyRef Name="MaPhong" />
+    </Key>
+    <Property Name="MaPhong" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SoPhong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LoaiPhong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TrangThai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TienPhong" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="HOADONVIENPHIs" Relationship="Self.FK__HOADONVIE__MaPho__03F0984C" FromRole="PHONGBENH" ToRole="HOADONVIENPHI" />
+  </EntityType>
+  <EntityType Name="TAIKHOAN">
+    <Key>
+      <PropertyRef Name="TaiKhoan1" />
+    </Key>
+    <Property Name="TaiKhoan1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MaKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LoaiTK" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AnhCaNhan" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK__LICHHEN__MaBacSi__160F4887">
+    <End Role="BACSI" Type="Self.BACSI" Multiplicity="0..1" />
+    <End Role="LICHHEN" Type="Self.LICHHEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BACSI">
+        <PropertyRef Name="MaBacSi" />
+      </Principal>
+      <Dependent Role="LICHHEN">
+        <PropertyRef Name="MaBacSi" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HOADONVIE__MaBen__02FC7413">
+    <End Role="BENHNHAN" Type="Self.BENHNHAN" Multiplicity="0..1" />
+    <End Role="HOADONVIENPHI" Type="Self.HOADONVIENPHI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BENHNHAN">
+        <PropertyRef Name="MaBenhNhan" />
+      </Principal>
+      <Dependent Role="HOADONVIENPHI">
+        <PropertyRef Name="MaBenhNhan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__LICHHEN__MaBenhN__4D94879B">
+    <End Role="BENHNHAN" Type="Self.BENHNHAN" Multiplicity="0..1" />
+    <End Role="LICHHEN" Type="Self.LICHHEN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BENHNHAN">
+        <PropertyRef Name="MaBenhNhan" />
+      </Principal>
+      <Dependent Role="LICHHEN">
+        <PropertyRef Name="MaBenhNhan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HOADONVIE__MaPho__03F0984C">
+    <End Role="PHONGBENH" Type="Self.PHONGBENH" Multiplicity="0..1" />
+    <End Role="HOADONVIENPHI" Type="Self.HOADONVIENPHI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PHONGBENH">
+        <PropertyRef Name="MaPhong" />
+      </Principal>
+      <Dependent Role="HOADONVIENPHI">
+        <PropertyRef Name="MaPhong" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QLBVEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BACSIs" EntityType="Self.BACSI" />
+    <EntitySet Name="BENHNHANs" EntityType="Self.BENHNHAN" />
+    <EntitySet Name="HOADONVIENPHIs" EntityType="Self.HOADONVIENPHI" />
+    <EntitySet Name="LICHHENs" EntityType="Self.LICHHEN" />
+    <EntitySet Name="PHONGBENHs" EntityType="Self.PHONGBENH" />
+    <EntitySet Name="TAIKHOANs" EntityType="Self.TAIKHOAN" />
+    <AssociationSet Name="FK__LICHHEN__MaBacSi__160F4887" Association="Self.FK__LICHHEN__MaBacSi__160F4887">
+      <End Role="BACSI" EntitySet="BACSIs" />
+      <End Role="LICHHEN" EntitySet="LICHHENs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HOADONVIE__MaBen__02FC7413" Association="Self.FK__HOADONVIE__MaBen__02FC7413">
+      <End Role="BENHNHAN" EntitySet="BENHNHANs" />
+      <End Role="HOADONVIENPHI" EntitySet="HOADONVIENPHIs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__LICHHEN__MaBenhN__4D94879B" Association="Self.FK__LICHHEN__MaBenhN__4D94879B">
+      <End Role="BENHNHAN" EntitySet="BENHNHANs" />
+      <End Role="LICHHEN" EntitySet="LICHHENs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HOADONVIE__MaPho__03F0984C" Association="Self.FK__HOADONVIE__MaPho__03F0984C">
+      <End Role="PHONGBENH" EntitySet="PHONGBENHs" />
+      <End Role="HOADONVIENPHI" EntitySet="HOADONVIENPHIs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

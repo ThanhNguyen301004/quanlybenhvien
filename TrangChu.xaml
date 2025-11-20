@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿<Page x:Class="QUANLYBENHVIEN.TrangChu"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -349,4 +350,357 @@
             </Border>
         </Grid>
     </ScrollViewer>
+=======
+﻿<Page x:Class="QUANLYBENHVIEN.TrangChu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:QUANLYBENHVIEN"
+      mc:Ignorable="d" 
+      d:DesignHeight="1200" d:DesignWidth="1200"
+      Title="TrangChu - Hệ Thống Quản Lý Bệnh Viện">
+
+    <Page.Resources>
+        <!-- Styles for Cards -->
+        <Style x:Key="CardStyle" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Gray" Direction="270" ShadowDepth="3" Opacity="0.3" BlurRadius="10"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Styles for Headers -->
+        <Style x:Key="HeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#2E86AB"/>
+            <Setter Property="Margin" Value="0,0,0,15"/>
+        </Style>
+
+        <!-- Styles for Statistics Numbers -->
+        <Style x:Key="StatNumberStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="36"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,10"/>
+        </Style>
+
+        <!-- Styles for Statistics Labels -->
+        <Style x:Key="StatLabelStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="#666666"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+
+        <!-- Button Style -->
+        <Style x:Key="ActionButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#2E86AB"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="5" 
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#236B87"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid Background="#F5F7FA">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header Section -->
+            <Border Grid.Row="0" Background="#2E86AB" Padding="30,20">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="TRANG CHỦ" FontSize="32" FontWeight="Bold" Foreground="White"/>
+                        <TextBlock Text="Hệ Thống Quản Lý Bệnh Viện" FontSize="16" Foreground="#B8D4E3" Margin="0,5,0,0"/>
+                    </StackPanel>
+
+             
+                </Grid>
+            </Border>
+
+            <!-- Statistics Cards Section -->
+            <UniformGrid Grid.Row="1" Columns="4" Margin="20,20,20,10">
+                <!-- Patients Card -->
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <Ellipse Width="60" Height="60" Fill="#4CAF50" HorizontalAlignment="Center">
+                            <Ellipse.Effect>
+                                <DropShadowEffect Color="#4CAF50" Direction="270" ShadowDepth="2" Opacity="0.3" BlurRadius="5"/>
+                            </Ellipse.Effect>
+                        </Ellipse>
+                        <TextBlock Text="👤" FontSize="24" HorizontalAlignment="Center" Margin="0,-42,0,20" Foreground="White"/>
+                        <TextBlock x:Name="Tb_tongBenhNhan" Style="{StaticResource StatNumberStyle}" Foreground="#4CAF50"/>
+                        <TextBlock Text="Tổng Bệnh Nhân" Style="{StaticResource StatLabelStyle}"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Doctors Card -->
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <Ellipse Width="60" Height="60" Fill="#2196F3" HorizontalAlignment="Center">
+                            <Ellipse.Effect>
+                                <DropShadowEffect Color="#2196F3" Direction="270" ShadowDepth="2" Opacity="0.3" BlurRadius="5"/>
+                            </Ellipse.Effect>
+                        </Ellipse>
+                        <TextBlock Text="👩‍⚕️" FontSize="24" HorizontalAlignment="Center" Margin="0,-42,0,20" Foreground="White"/>
+                        <TextBlock x:Name="Tb_tongBacSi" Style="{StaticResource StatNumberStyle}" Foreground="#2196F3"/>
+                        <TextBlock Text="Bác Sĩ" Style="{StaticResource StatLabelStyle}"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Appointments Card -->
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <Ellipse Width="60" Height="60" Fill="#FF9800" HorizontalAlignment="Center">
+                            <Ellipse.Effect>
+                                <DropShadowEffect Color="#FF9800" Direction="270" ShadowDepth="2" Opacity="0.3" BlurRadius="5"/>
+                            </Ellipse.Effect>
+                        </Ellipse>
+                        <TextBlock Text="📅" FontSize="24" HorizontalAlignment="Center" Margin="0,-42,0,20" Foreground="White"/>
+                        <TextBlock x:Name="Tb_lichHenHomNay" Style="{StaticResource StatNumberStyle}" Foreground="#FF9800"/>
+                        <TextBlock Text="Lịch Hẹn Hôm Nay" Style="{StaticResource StatLabelStyle}"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Rooms Card -->
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <Ellipse Width="60" Height="60" Fill="#9C27B0" HorizontalAlignment="Center">
+                            <Ellipse.Effect>
+                                <DropShadowEffect Color="#9C27B0" Direction="270" ShadowDepth="2" Opacity="0.3" BlurRadius="5"/>
+                            </Ellipse.Effect>
+                        </Ellipse>
+                        <TextBlock Text="🏥" FontSize="24" HorizontalAlignment="Center" Margin="0,-42,0,20" Foreground="White"/>
+                        <TextBlock x:Name="Tb_tyLeSuDungPhong" Style="{StaticResource StatNumberStyle}" Foreground="#9C27B0"/>
+                        <TextBlock Text="Tỷ Lệ Sử Dụng Phòng" Style="{StaticResource StatLabelStyle}"/>
+                    </StackPanel>
+                </Border>
+            </UniformGrid>
+
+            <!-- Main Content Section -->
+            <Grid Grid.Row="2" Margin="20,10,20,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Recent Appointments -->
+                <Border Grid.Column="0" Style="{StaticResource CardStyle}" Margin="0,0,10,0">
+                    <StackPanel>
+                        <Grid>
+                            <TextBlock Text="Lịch Hẹn Gần Đây" Style="{StaticResource HeaderStyle}"/>
+                            <Button Content="Xem Tất Cả" Style="{StaticResource ActionButtonStyle}" 
+                                    HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                        </Grid>
+
+                        <ListView Height="200" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="#F8F9FF" CornerRadius="5" Padding="15" Margin="0,2">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Ellipse Grid.Column="0" Width="40" Height="40" Fill="#E3F2FD" Margin="0,0,15,0"/>
+                                            <TextBlock Grid.Column="0" Text="👤" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,15,0"/>
+
+                                            <StackPanel Grid.Column="1">
+                                                <TextBlock Text="Nguyễn Văn A" FontWeight="SemiBold" FontSize="14"/>
+                                                <TextBlock Text="BS. Trần Thị B - Nội Khoa" FontSize="12" Foreground="#666666"/>
+                                            </StackPanel>
+
+                                            <TextBlock Grid.Column="2" Text="09:30" FontSize="12" Foreground="#666666" VerticalAlignment="Center" Margin="10,0"/>
+
+                                            <Border Grid.Column="3" Background="#4CAF50" CornerRadius="10" Padding="8,3">
+                                                <TextBlock Text="Đã Xác Nhận" FontSize="10" Foreground="White" FontWeight="SemiBold"/>
+                                            </Border>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            <ListViewItem Content="Lịch hẹn 1"/>
+                            <ListViewItem Content="Lịch hẹn 2"/>
+                            <ListViewItem Content="Lịch hẹn 3"/>
+                            <ListViewItem Content="Lịch hẹn 4"/>
+                        </ListView>
+                    </StackPanel>
+                </Border>
+
+                <!-- Quick Actions -->
+                <Border Grid.Column="1" Style="{StaticResource CardStyle}" Margin="10,0,0,0">
+                    <StackPanel>
+                        <TextBlock Text="Thao Tác Nhanh" Style="{StaticResource HeaderStyle}"/>
+
+                        <Button Click="Button_Click_BenhNhan" Content="📝 Đăng Ký Bệnh Nhân Mới" Style="{StaticResource ActionButtonStyle}" 
+                                HorizontalAlignment="Stretch" Background="#4CAF50" Margin="0,5"/>
+
+                        <Button Click="Button_Click_LichHen" Content="📅 Tạo Lịch Hẹn" Style="{StaticResource ActionButtonStyle}" 
+                                HorizontalAlignment="Stretch" Background="#2196F3" Margin="0,5"/>
+
+                        <Button Click="Button_Click_PhongBenh" Content="🏥 Quản Lý Phòng" Style="{StaticResource ActionButtonStyle}" 
+                                HorizontalAlignment="Stretch" Background="#FF9800" Margin="0,5"/>
+
+                        <Button Click="Button_Click_BacSi" Content="👨‍⚕️ Thông Tin Bác Sĩ" Style="{StaticResource ActionButtonStyle}" 
+                                HorizontalAlignment="Stretch" Background="#9C27B0" Margin="0,5"/>
+
+                        <Button Click="Button_Click_HoaDon" Content="💰 Hóa Đơn Viện Phí" Style="{StaticResource ActionButtonStyle}" 
+                                HorizontalAlignment="Stretch" Background="#F44336" Margin="0,5"/>
+
+                        <Separator Margin="0,15"/>
+
+                        <TextBlock Text="Thông Báo Hệ Thống" Style="{StaticResource HeaderStyle}" Margin="0,10,0,10"/>
+
+                        <Border Background="#FFF3CD" BorderBrush="#FFEAA7" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,5">
+                            <StackPanel>
+                                <TextBlock Text="⚠️ Cảnh Báo" FontWeight="Bold" FontSize="12" Foreground="#856404"/>
+                                <TextBlock Text="Phòng 301 cần bảo trì định kỳ vào 15:00 hôm nay" 
+                                           FontSize="11" TextWrapping="Wrap" Foreground="#856404" Margin="0,3,0,0"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Background="#D1ECF1" BorderBrush="#B6D4DA" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,5">
+                            <StackPanel>
+                                <TextBlock Text="ℹ️ Thông Tin" FontWeight="Bold" FontSize="12" Foreground="#0C5460"/>
+                                <TextBlock Text="Hệ thống sẽ được cập nhật vào 22:00 tối nay" 
+                                           FontSize="11" TextWrapping="Wrap" Foreground="#0C5460" Margin="0,3,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- Additional Statistics Section -->
+            <Border Grid.Row="3" Style="{StaticResource CardStyle}" Margin="20,0,20,20">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Revenue Chart Placeholder -->
+                    <StackPanel Grid.Column="0" Margin="0,0,20,0">
+                        <TextBlock Text="Doanh Thu Tháng" Style="{StaticResource HeaderStyle}"/>
+                        <Border Height="150" Background="#F8F9FF" CornerRadius="5">
+                            <TextBlock Text="📊 Biểu Đồ Doanh Thu&#x0a;(Tích hợp Chart Control)" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                       TextAlignment="Center" Foreground="#666666"/>
+                            
+                        </Border>
+                        <TextBlock x:Name="Tb_doanhThuThang" FontWeight="Bold" FontSize="14" 
+           HorizontalAlignment="Center" Margin="0,10,0,0" Foreground="#4CAF50"/>
+
+                    </StackPanel>
+
+                    <!-- Department Statistics -->
+                    <StackPanel Grid.Column="1" Margin="20,0">
+                        <TextBlock Text="Thống Kê Khoa" Style="{StaticResource HeaderStyle}"/>
+                        <StackPanel>
+                            <Border Background="#E8F5E8" CornerRadius="3" Padding="8" Margin="0,2">
+                                <Grid>
+                                    <TextBlock Text="Nội Khoa" FontSize="12"/>
+                                    <TextBlock Text="85%" FontSize="12" HorizontalAlignment="Right" FontWeight="Bold" Foreground="#4CAF50"/>
+                                </Grid>
+                            </Border>
+                            <Border Background="#E3F2FD" CornerRadius="3" Padding="8" Margin="0,2">
+                                <Grid>
+                                    <TextBlock Text="Ngoại Khoa" FontSize="12"/>
+                                    <TextBlock Text="72%" FontSize="12" HorizontalAlignment="Right" FontWeight="Bold" Foreground="#2196F3"/>
+                                </Grid>
+                            </Border>
+                            <Border Background="#FFF3E0" CornerRadius="3" Padding="8" Margin="0,2">
+                                <Grid>
+                                    <TextBlock Text="Nhi Khoa" FontSize="12"/>
+                                    <TextBlock Text="68%" FontSize="12" HorizontalAlignment="Right" FontWeight="Bold" Foreground="#FF9800"/>
+                                </Grid>
+                            </Border>
+                            <Border Background="#F3E5F5" CornerRadius="3" Padding="8" Margin="0,2">
+                                <Grid>
+                                    <TextBlock Text="Tim Mạch" FontSize="12"/>
+                                    <TextBlock Text="91%" FontSize="12" HorizontalAlignment="Right" FontWeight="Bold" Foreground="#9C27B0"/>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- System Status -->
+                    <StackPanel Grid.Column="2" Margin="20,0,0,0">
+                        <TextBlock Text="Trạng Thái Hệ Thống" Style="{StaticResource HeaderStyle}"/>
+                        <StackPanel>
+                            <Border Background="#E8F5E8" BorderBrush="#4CAF50" BorderThickness="1" 
+                                    CornerRadius="5" Padding="10" Margin="0,3">
+                                <Grid>
+                                    <TextBlock Text="🟢 Cơ Sở Dữ Liệu" FontSize="12"/>
+                                    <TextBlock Text="Hoạt Động" FontSize="12" HorizontalAlignment="Right" 
+                                               Foreground="#4CAF50" FontWeight="SemiBold"/>
+                                </Grid>
+                            </Border>
+
+                            <Border Background="#E8F5E8" BorderBrush="#4CAF50" BorderThickness="1" 
+                                    CornerRadius="5" Padding="10" Margin="0,3">
+                                <Grid>
+                                    <TextBlock Text="🟢 Server Web" FontSize="12"/>
+                                    <TextBlock Text="Bình Thường" FontSize="12" HorizontalAlignment="Right" 
+                                               Foreground="#4CAF50" FontWeight="SemiBold"/>
+                                </Grid>
+                            </Border>
+
+                            <Border Background="#FFF3CD" BorderBrush="#FFC107" BorderThickness="1" 
+                                    CornerRadius="5" Padding="10" Margin="0,3">
+                                <Grid>
+                                    <TextBlock Text="🟡 Backup" FontSize="12"/>
+                                    <TextBlock Text="Đang Xử Lý" FontSize="12" HorizontalAlignment="Right" 
+                                               Foreground="#FF8F00" FontWeight="SemiBold"/>
+                                </Grid>
+                            </Border>
+
+                            <TextBlock Text="Cập nhật lần cuối: 14:30" FontSize="10" 
+                                       Foreground="#666666" HorizontalAlignment="Right" Margin="0,10,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </ScrollViewer>
+>>>>>>> origin/master
 </Page>

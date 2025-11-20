@@ -1,0 +1,9 @@
+﻿===== HÓA ĐƠN VIỆN PHÍ =====
+Mã hóa đơn  : 5
+Bệnh nhân   : BNA
+SĐT         : 012345678
+Phòng bệnh  : A1
+Ngày nhập viện : 15/09/2023
+Ngày xuất viện : 22/09/2024
+Thành tiền  : 1,642,000 VNĐ
+============================

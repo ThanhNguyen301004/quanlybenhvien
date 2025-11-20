@@ -1,0 +1,9 @@
+﻿===== HÓA ĐƠN VIỆN PHÍ =====
+Mã hóa đơn  : 6
+Bệnh nhân   : BNA
+SĐT         : 012345678
+Phòng bệnh  : A2
+Ngày nhập viện : 27/09/2025
+Ngày xuất viện : 27/09/2025
+Thành tiền  : 157,000 VNĐ
+============================
