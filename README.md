@@ -53,71 +53,14 @@ Dự án **Hệ Thống Quản Lý Bệnh Viện** là một ứng dụng đư�
 
 - **Ngôn ngữ lập trình**: C#
 - **Framework**: XAML (cho giao diện desktop)
-- **Cơ sở dữ liệu**: MySQL / PostgreSQL
-- **Build tool**: Maven / Gradle
-- **IDE**: Eclipse / IntelliJ IDEA / NetBeans
+- **Cơ sở dữ liệu**: ADO.NET
+- **IDE**: Visual Studio
 
-##  Yêu Cầu Hệ Thống
-
-### Phần Cứng
-- **CPU**: Intel Core i3 hoặc tương đương
-- **RAM**: Tối thiểu 4GB
-- **Ổ cứng**: 500MB dung lượng trống
-
-### Phần Mềm
-- **JDK**: Phiên bản 11 trở lên
-- **Database**: MySQL 5.7+ hoặc PostgreSQL 10+
-- **Hệ điều hành**: Windows 10/11, macOS, hoặc Linux
 
 ##  Cài Đặt
-
-### 1. Clone Repository
-
 ```bash
 git clone https://github.com/ThanhNguyen301004/quanlybenhvien.git
 cd quanlybenhvien
-```
-
-### 2. Cấu Hình Database
-
-Tạo database mới:
-
-```sql
-CREATE DATABASE hospital_management;
-```
-
-Import file SQL schema:
-
-```bash
-mysql -u username -p hospital_management < database/schema.sql
-```
-
-### 3. Cấu Hình Kết Nối
-
-Chỉnh sửa file `config/database.properties`:
-
-```properties
-db.host=localhost
-db.port=3306
-db.name=hospital_management
-db.username=your_username
-db.password=your_password
-```
-
-### 4. Build và Chạy Ứng Dụng
-
-Sử dụng Maven:
-
-```bash
-mvn clean install
-mvn exec:java
-```
-
-Hoặc Gradle:
-
-```bash
-gradle build
-gradle run
 ```
 
 ##  Sử Dụng
@@ -140,10 +83,6 @@ Sử dụng tài khoản mặc định:
 5. **Ghi nhận kết quả** khám và điều trị
 6. **Xuất báo cáo** khi cần thiết
 
-#
-
-
-
 ##  Nhóm Phát Triển
 
 **Nhóm 1 - Đồ Án Nhóm**
@@ -156,4 +95,3 @@ Sử dụng tài khoản mặc định:
 - **Trần Thanh Sỹ**
 - **Lê Vĩnh Toàn**
 - **Tô Trần Tuyển**
-
