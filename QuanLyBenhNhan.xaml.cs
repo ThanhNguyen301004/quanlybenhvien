@@ -22,7 +22,7 @@ namespace QUANLYBENHVIEN
             LoadData();
         }
 
-        // ViewModel with INotifyPropertyChanged for better data binding
+       
         public class BenhNhanViewModel : INotifyPropertyChanged
         {
             private bool _isSelected;
