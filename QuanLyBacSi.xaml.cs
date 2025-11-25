@@ -18,7 +18,7 @@ using System.IO;
 
 namespace QUANLYBENHVIEN
 {
-    /// <summary>
+    
     /// Interaction logic for QuanLyBacSi.xaml
     /// </summary>
     public partial class QuanLyBacSi : Page
